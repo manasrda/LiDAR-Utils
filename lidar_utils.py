@@ -47,7 +47,7 @@ def rotate(pcd, rotation_matrix):
     return pcd
 
 
-def trim(pcd, x_limits, y_limits, z_limits, intensity_threshold_min=0, intensity_threshold_max=150, threshold_on_intensity=True):
+def trim(pcd, x_limits, y_limits, z_limits, intensity_threshold_min=0, intensity_threshold_max=150, threshold_on_intensity=False):
     cx = ((max(x_limits) >= pcd[:,0]) & (min(x_limits) <= pcd[:,0]))
     cy = ((max(y_limits) >= pcd[:,1]) & (min(y_limits) <= pcd[:,1]))
     cz = ((max(z_limits) >= pcd[:,2]) & (min(z_limits) <= pcd[:,2]))
