@@ -1,19 +1,20 @@
 import numpy as np
 
+
 # -------------------------------------------- NOTE: To Be Overwritten: START
 def get_limits(manual=True):
     if manual:
-        x_limits = np.array([ 0.65,1.7])
-        y_limits = np.array([ -6,2.5])
-        z_limits = np.array([ -2,-1.5])
+        x_limits = np.array([  0,5])
+        y_limits = np.array([ -5,5])
+        z_limits = np.array([ -5,5])
         return x_limits, y_limits, z_limits
 
 
 def get_rotation_angles(manual=True):
     if manual:
-        x_rotation_angle = -1.75
-        y_rotation_angle = -52.5
-        z_rotation_angle = -2
+        x_rotation_angle = 0
+        y_rotation_angle = -45
+        z_rotation_angle = 0
         return x_rotation_angle, y_rotation_angle, z_rotation_angle  
 # -------------------------------------------- NOTE: To Be Overwritten: END
 
