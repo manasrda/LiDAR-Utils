@@ -1,8 +1,8 @@
 import numpy as np
-import numba as nb
+#import numba as nb
 
 # -------------------------------------------- NOTE: To Be Overwritten: START
-@nb.njit(fastmath=True, cache=True)
+#@nb.njit(fastmath=True, cache=True)
 def get_limits(manual=True):
     if manual:
         x_limits = np.array([ 0.65,1.7])
@@ -11,7 +11,7 @@ def get_limits(manual=True):
         return x_limits, y_limits, z_limits
 
 
-@nb.njit(fastmath=True, cache=True)
+#@nb.njit(fastmath=True, cache=True)
 def get_rotation_angles(manual=True):
     if manual:
         x_rotation_angle = -1.75
@@ -22,7 +22,7 @@ def get_rotation_angles(manual=True):
 
 
 # -------------------------------------------- Preprocessing Functions: START
-@nb.njit(fastmath=True, cache=True)
+#@nb.njit(fastmath=True, cache=True)
 def get_3d_rotation_matrix(x_rotation_angle, y_rotation_angle, z_rotation_angle):
     theta_xyz_degrees = np.array([x_rotation_angle, y_rotation_angle, z_rotation_angle])
     theta = theta_xyz_degrees * (np.pi/180)
@@ -39,20 +39,20 @@ def get_3d_rotation_matrix(x_rotation_angle, y_rotation_angle, z_rotation_angle)
     return Rx @ Ry @ Rz
 
 
-@nb.njit(fastmath=True, cache=True)
+#@nb.njit(fastmath=True, cache=True)
 def assign_velodyne_variables(pcd):
         pcd = np.stack((pcd['x'], pcd['y'], pcd['z'], pcd['intensity'], pcd['ring'])).T
         return pcd
 
 
-@nb.njit(fastmath=True, cache=True)
+#@nb.njit(fastmath=True, cache=True)
 def rotate(pcd, rotation_matrix):
     xyz = np.ascontiguousarray(pcd[:,0:3])
     pcd[:,0:3] =  xyz @ rotation_matrix
     return pcd
 
 
-@nb.njit(fastmath=True, cache=True)
+#@nb.njit(fastmath=True, cache=True)
 def trim(pcd, x_limits, y_limits, z_limits, intensity_threshold_min=0, intensity_threshold_max=150, threshold_on_intensity=True):
     cx = ((max(x_limits) >= pcd[:,0]) & (min(x_limits) <= pcd[:,0]))
     cy = ((max(y_limits) >= pcd[:,1]) & (min(y_limits) <= pcd[:,1]))
@@ -67,13 +67,13 @@ def trim(pcd, x_limits, y_limits, z_limits, intensity_threshold_min=0, intensity
     return pcd
 
 
-@nb.njit(fastmath=True, cache=True)
+#@nb.njit(fastmath=True, cache=True)
 def sort_by_lateral_distance(pcd):
     lateral_distance_index = 1
     return pcd[np.argsort(pcd[:, lateral_distance_index])]
 
 
-@nb.njit(fastmath=True, cache=True)
+#@nb.njit(fastmath=True, cache=True)
 def preprocess_pcd(pcd, limits, rotation_angles):
     x_limits, y_limits, z_limits = limits
     x_rotation_angle, y_rotation_angle, z_rotation_angle = rotation_angles
